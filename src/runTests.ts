@@ -19,6 +19,10 @@ const test2 = () => {
 };
 
 export const runTests = () => {
-  test1();
-  test2();
+  myJest.it("Should assert 1 = 1", () => {
+    test1();
+  });
+  myJest.it("Should assert 1 != 2", () => {
+    test2();
+  });
 };
