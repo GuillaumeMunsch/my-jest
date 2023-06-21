@@ -1,4 +1,4 @@
-type ItOptions = {
+export type ItOptions = {
   modulator: "skip" | "only" | "none";
 };
 
@@ -24,10 +24,11 @@ type It = (testName: string, testScenario: () => void, options?: ItOptions) => v
 export type MyJestProps = {
   it: It;
   expectToBe: (result: any, expectedResult: any) => boolean;
-  describe: (describeName: string, describeScenario: MyDescribeProps) => void;
+  describe: (describeName: string, describeScenario: MyDescribe) => void;
 };
 
 export type MyDescribeProps = Omit<MyJestProps, "describe">;
+type MyDescribe = (props: MyDescribeProps) => void;
 
 const myJest: MyJestProps = {
   expectToBe: (result: any, expectedResult: any): boolean => {
@@ -50,9 +51,22 @@ const myJest: MyJestProps = {
     testScenario();
   },
 
-  describe: (describeName: string, describeScenario: (props: MyDescribeProps) => void) => {
+  describe: (describeName: string, describeScenario: MyDescribe) => {
     console.log(describeName);
     const testArray: TestScenario[] = [];
+    const localIt: It = (testName, scenario, options) => {
+      testArray.push({
+        name: testName,
+        scenario,
+        options,
+      });
+    };
+    describeScenario({
+      expectToBe: () => null,
+      it: localIt,
+    });
+
+    console.log("testArray", testArray);
 
     const executeTests = () => {};
 
