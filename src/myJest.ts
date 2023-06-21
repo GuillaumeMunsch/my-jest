@@ -1,3 +1,5 @@
+import extractTestsToRun from "./utils/extractTestsToRun";
+
 export type ItOptions = {
   modulator: "skip" | "only" | "none";
 };
@@ -66,11 +68,11 @@ const myJest: MyJestProps = {
       it: localIt,
     });
 
-    console.log("testArray", testArray);
-
-    const executeTests = () => {};
-
-    return executeTests;
+    const testsToRun = extractTestsToRun(testArray);
+    testsToRun.forEach(({ name, scenario }) => {
+      console.log("Name", name);
+      scenario();
+    });
   },
 };
 
