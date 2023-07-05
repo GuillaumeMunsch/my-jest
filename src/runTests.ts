@@ -1,19 +1,5 @@
 import myJest from "./myJest";
 
-// Next implem: Deepcheck (Array & Objects) avec variables = fonctions (-> toString de Môd)
-// const myToString = <T>(input: T) => {
-//   try {
-//     return JSON.stringify(input, (_, value) => {
-//       if (typeof value === "function") {
-//         return value.toString();
-//       }
-//       return value;
-//     });
-//   } catch {
-//     return input;
-//   }
-// };
-
 export const runTests = () => {
   myJest.describe("Test suite", ({ it, expectToBe }) => {
     it("Should assert 1 = 1", () => {

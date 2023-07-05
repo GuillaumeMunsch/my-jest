@@ -26,6 +26,7 @@ type It = (testName: string, testScenario: () => void, options?: ItOptions) => v
 export type MyJestProps = {
   it: It;
   expectToBe: (result: any, expectedResult: any) => boolean;
+  expectToEqual: (result: any, expectedResult: any) => boolean;
   describe: (describeName: string, describeScenario: MyDescribe) => void;
 };
 
@@ -35,6 +36,12 @@ type MyDescribe = (props: MyDescribeProps) => void;
 const myJest: MyJestProps = {
   expectToBe: (result: any, expectedResult: any): boolean => {
     const isEqual = result === expectedResult;
+    displayResult(isEqual);
+    return isEqual;
+  },
+
+  expectToEqual: (result: any, expectedResult: any): boolean => {
+    const isEqual = deepCheck(result, expectedResult);
     displayResult(isEqual);
     return isEqual;
   },
