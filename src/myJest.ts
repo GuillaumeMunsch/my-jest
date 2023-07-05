@@ -1,3 +1,4 @@
+import { deepCheck } from "./utils/deepCheck";
 import extractTestsToRun from "./utils/extractTestsToRun";
 
 export type ItOptions = {
@@ -72,6 +73,7 @@ const myJest: MyJestProps = {
     };
     describeScenario({
       expectToBe: () => null,
+      expectToEqual: () => null,
       it: localIt,
     });
 
