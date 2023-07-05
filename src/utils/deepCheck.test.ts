@@ -74,4 +74,16 @@ describe("deepCheck", () => {
     // THEN
     expect(result).toBe(true);
   });
+
+  it("Should assert that 2 object with a similar function as prop, are the same", () => {
+    // GIVEN
+    const givenObject = { increment: (i: number) => i + 1 };
+    const expectedObject = { increment: (i: number) => i + 1 };
+
+    // WHEN
+    const result = deepCheck(givenObject, expectedObject);
+
+    // THEN
+    expect(result).toBe(true);
+  });
 });

@@ -1,4 +1,4 @@
-const myToString = <T>(input: T) => {
+export const myToString = <T>(input: T) => {
   try {
     return JSON.stringify(input, (_, value) => {
       if (typeof value === "function") {
